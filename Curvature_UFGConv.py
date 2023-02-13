@@ -266,7 +266,7 @@ if __name__ == '__main__':
                         help='learning rate (default: 5e-3)')
     parser.add_argument('--wd', type=float, default=0.005, #0.015 best for cora;0.05 best for cit,0.005 for pub
                         help='weight decay (default: 5e-3)')
-    parser.add_argument('--nhid', type=int, default=64, # best 64 from jenson pubmed
+    parser.add_argument('--nhid', type=int, default=64, #
                         help='number of hidden units (default: 16)')
     parser.add_argument('--Lev', type=int, default=2,
                         help='level of transform (default: 2)')
@@ -343,12 +343,8 @@ if __name__ == '__main__':
         rc = np.array(list(nx.get_edge_attributes(G_orc, 'ricciCurvature').values()))
         min_rc = abs(min(rc))
         A = np.zeros((num_nodes, num_nodes))
-        for n1, n2 in G.edges():
-            A[n1, n2] = np.exp(orc.G[n1][n2]["ricciCurvature"])
-            #A[n1, n2] = orc.G[n1][n2]["ricciCurvature"]+min_rc
-            #A[n1, n2] = 1-(orc.G[n1][n2]["ricciCurvature"]) # using 1-rc^3 reach 84.13% (83.43%)no tuning
-            #A[n1, n2] = abs(orc.G[n1][n2]["ricciCurvature"])  # cora max acc = 84%. 
-            #A[n1, n2] = 1+orc.G[n1][n2]["ricciCurvature"]
+        for n1, n2 in G.edges()
+            #A[n1, n2] = 1-(orc.G[n1][n2]["ricciCurvature"]) 
             A[n2, n1] = A[n1, n2]
         edge_index = A.nonzero()
         weight = torch.tensor(A[edge_index])
